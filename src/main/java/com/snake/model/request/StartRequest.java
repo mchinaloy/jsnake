@@ -1,17 +1,24 @@
 package com.snake.model.request;
 
-import com.snake.model.domain.Board;
-import com.snake.model.domain.Game;
-import com.snake.model.domain.Snake;
-import com.snake.model.domain.Turn;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.snake.model.domain.request.Board;
+import com.snake.model.domain.request.Game;
+import com.snake.model.domain.request.Snake;
+import com.snake.model.domain.request.Turn;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StartRequest {
 
-    private final Game game;
-    private final Turn turn;
-    private final Board board;
-    private final Snake snake;
+    private Game game;
+    private Turn turn;
+    private Board board;
+
+    @JsonProperty("you")
+    private Snake snake;
 
 }

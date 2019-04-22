@@ -1,0 +1,14 @@
+version: '2'
+services:
+  engine:
+    image: "battlesnakeio-engine:latest"
+    ports:
+      - "3004:3004"
+      - "3005:3005"
+      - "3010:3010"
+  board:
+    image: "battlesnakeio/board:latest"
+    ports:
+      - "3009:80"
+    links:
+      - engine
