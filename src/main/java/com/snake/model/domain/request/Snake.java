@@ -1,19 +1,24 @@
 package com.snake.model.domain.request;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "SnakeBuilder")
+@JsonDeserialize(builder = Snake.SnakeBuilder.class)
 public class Snake {
 
-    private String id;
-    private String name;
-    private Integer health;
-    private List<Coordinate> body;
+    private final String id;
+    private final String name;
+    private final Integer health;
+    private final List<Coordinate> body;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class SnakeBuilder {
+    }
 
 }

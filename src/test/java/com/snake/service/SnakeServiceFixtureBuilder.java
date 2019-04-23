@@ -8,19 +8,19 @@ import com.snake.model.response.StartResponse;
 public interface SnakeServiceFixtureBuilder {
 
     static StartRequest startRequest() {
-        return new StartRequest();
+        return StartRequest.builder().build();
     }
 
     static StartResponse startResponse() {
-        return new StartResponse();
+        return StartResponse.builder().build();
     }
 
     static MoveRequest moveRequest() {
-        return new MoveRequest();
+        return MoveRequest.builder().build();
     }
 
     static MoveResponse moveResponse() {
-        return new MoveResponse();
+        return MoveResponse.builder().build();
     }
 
 }

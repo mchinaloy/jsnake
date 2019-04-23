@@ -1,14 +1,19 @@
 package com.snake.model.response;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "MoveResponseBuilder")
+@JsonDeserialize(builder = MoveResponse.MoveResponseBuilder.class)
 public class MoveResponse {
 
-    private String move;
+    private final String move;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class MoveResponseBuilder {
+    }
 
 }

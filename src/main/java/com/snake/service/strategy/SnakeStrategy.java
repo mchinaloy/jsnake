@@ -8,8 +8,8 @@ import reactor.core.publisher.Mono;
 
 public interface SnakeStrategy {
 
-    Mono<StartResponse> start(Mono<StartRequest> startRequest);
+    Mono<StartResponse> start(final Mono<StartRequest> startRequest);
 
-    Mono<MoveResponse> move(Mono<MoveRequest> moveRequest);
+    Mono<MoveResponse> move(final Mono<MoveRequest> moveRequest);
 
 }

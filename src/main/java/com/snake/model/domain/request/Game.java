@@ -1,14 +1,19 @@
 package com.snake.model.domain.request;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "GameBuilder")
+@JsonDeserialize(builder = Game.GameBuilder.class)
 public class Game {
 
-    private String id;
+    private final String id;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class GameBuilder {
+    }
 
 }

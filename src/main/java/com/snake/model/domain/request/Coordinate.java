@@ -1,15 +1,20 @@
 package com.snake.model.domain.request;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "CoordinateBuilder")
+@JsonDeserialize(builder = Coordinate.CoordinateBuilder.class)
 public class Coordinate {
 
-    private Integer x;
-    private Integer y;
+    private final Integer x;
+    private final Integer y;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class CoordinateBuilder {
+    }
 
 }

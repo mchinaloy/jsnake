@@ -13,25 +13,25 @@ public class SnakeHandler {
 
     private final SnakeService snakeService;
 
-    public SnakeHandler(SnakeService snakeService) {
+    public SnakeHandler(final SnakeService snakeService) {
         this.snakeService = snakeService;
     }
 
-    public Mono<ServerResponse> start(ServerRequest serverRequest) {
+    public Mono<ServerResponse> start(final ServerRequest serverRequest) {
         Mono<StartResponse> startResponseMono = snakeService.start(serverRequest.bodyToMono(StartRequest.class));
         return ServerResponse.ok().body(startResponseMono, StartResponse.class);
     }
 
-    public Mono<ServerResponse> move(ServerRequest serverRequest) {
+    public Mono<ServerResponse> move(final ServerRequest serverRequest) {
         Mono<MoveResponse> moveResponseMono = snakeService.move(serverRequest.bodyToMono(MoveRequest.class));
         return ServerResponse.ok().body(moveResponseMono, MoveResponse.class);
     }
 
-    public Mono<ServerResponse> end(ServerRequest serverRequest) {
+    public Mono<ServerResponse> end(final ServerRequest serverRequest) {
         return ServerResponse.ok().build();
     }
 
-    public Mono<ServerResponse> ping(ServerRequest serverRequest) {
+    public Mono<ServerResponse> ping(final ServerRequest serverRequest) {
         return ServerResponse.ok().build();
     }
 

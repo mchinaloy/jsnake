@@ -1,14 +1,19 @@
 package com.snake.model.domain.request;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "TurnBuilder")
+@JsonDeserialize(builder = Turn.TurnBuilder.class)
 public class Turn {
 
-    private Integer turn;
+    private final Integer turn;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class TurnBuilder {
+    }
 
 }

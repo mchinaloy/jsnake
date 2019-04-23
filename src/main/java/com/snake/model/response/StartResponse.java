@@ -1,16 +1,21 @@
 package com.snake.model.response;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder(builderClassName = "StartResponseBuilder")
+@JsonDeserialize(builder = StartResponse.StartResponseBuilder.class)
 public class StartResponse {
 
-    private String color;
-    private String headType;
-    private String tailType;
+    private final String color;
+    private final String headType;
+    private final String tailType;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class StartResponseBuilder {
+    }
 
 }

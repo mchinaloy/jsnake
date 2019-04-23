@@ -17,7 +17,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class SnakeConfig {
 
     @Bean
-    public RouterFunction<ServerResponse> router (SnakeHandler snakeHandler) {
+    public RouterFunction<ServerResponse> router (final SnakeHandler snakeHandler) {
         return route()
             .POST("/start", accept(MediaType.APPLICATION_JSON), snakeHandler::start)
             .POST("/move", accept(MediaType.APPLICATION_JSON), snakeHandler::move)
@@ -27,7 +27,7 @@ public class SnakeConfig {
     }
 
     @Bean
-    public SnakeHandler snakeHandler(SnakeService snakeService) {
+    public SnakeHandler snakeHandler(final SnakeService snakeService) {
         return new SnakeHandler(snakeService);
     }
 
@@ -37,7 +37,7 @@ public class SnakeConfig {
     }
 
     @Bean
-    public SnakeService snakeService(SnakeStrategy snakeStrategy) {
+    public SnakeService snakeService(final SnakeStrategy snakeStrategy) {
         return new SnakeService(snakeStrategy);
     }
 

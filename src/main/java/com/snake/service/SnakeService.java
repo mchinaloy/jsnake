@@ -11,15 +11,15 @@ public class SnakeService {
 
     private final SnakeStrategy snakeStrategy;
 
-    public SnakeService(SnakeStrategy snakeStrategy) {
+    public SnakeService(final SnakeStrategy snakeStrategy) {
         this.snakeStrategy = snakeStrategy;
     }
 
-    public Mono<StartResponse> start(Mono<StartRequest> startRequest) {
+    public Mono<StartResponse> start(final Mono<StartRequest> startRequest) {
         return snakeStrategy.start(startRequest);
     }
 
-    public Mono<MoveResponse> move(Mono<MoveRequest> moveRequest) {
+    public Mono<MoveResponse> move(final Mono<MoveRequest> moveRequest) {
         return snakeStrategy.move(moveRequest);
     }
 

@@ -6,11 +6,11 @@ import com.snake.model.request.StartRequest;
 public interface StarSnakeStrategyFixtureBuilder {
 
     static StartRequest startRequest() {
-        return new StartRequest();
+        return StartRequest.builder().build();
     }
 
     static MoveRequest moveRequest() {
-        return new MoveRequest();
+        return MoveRequest.builder().build();
     }
 
 }

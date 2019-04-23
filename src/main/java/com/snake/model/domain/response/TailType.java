@@ -6,7 +6,7 @@ public enum TailType {
 
     private final String tailType;
 
-    TailType (String tailType) {
+    TailType (final String tailType) {
         this.tailType = tailType;
     }
 

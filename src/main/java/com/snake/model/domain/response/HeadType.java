@@ -6,7 +6,7 @@ public enum HeadType {
 
     private final String headType;
 
-    HeadType(String headType) {
+    HeadType(final String headType) {
         this.headType = headType;
     }
 

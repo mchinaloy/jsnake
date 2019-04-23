@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Mono;
 
 import static com.snake.service.SnakeServiceFixtureBuilder.moveRequest;
 import static com.snake.service.SnakeServiceFixtureBuilder.moveResponse;
@@ -32,30 +33,32 @@ class SnakeServiceUT {
     @Test
     void start() {
         // given
-        StartRequest startRequest = startRequest();
+        Mono<StartRequest> startRequest = Mono.just(startRequest());
+        Mono<StartResponse> startResponse = Mono.just(startResponse());
 
         // when
-//        when(snakeStrategy.start(eq(startRequest))).thenReturn(startResponse());
-//        StartResponse startResponse = snakeService.start(startRequest);
+        when(snakeStrategy.start(eq(startRequest))).thenReturn(startResponse);
+        Mono<StartResponse> actualStartResponse = snakeService.start(startRequest);
 
         // then
-//        verify(snakeStrategy).start(eq(startRequest));
-//        assertThat(startResponse, is(notNullValue()));
+        verify(snakeStrategy).start(eq(startRequest));
+        assertThat(actualStartResponse, is(notNullValue()));
     }
 
     @DisplayName("validRequest_Move_DelegateToStrategy")
     @Test
     void move() {
         // given
-        MoveRequest moveRequest = moveRequest();
+        Mono<MoveRequest> moveRequest = Mono.just(moveRequest());
+        Mono<MoveResponse> moveResponse = Mono.just(moveResponse());
 
         // when
-//        when(snakeStrategy.move(eq(moveRequest))).thenReturn(moveResponse());
-//        MoveResponse moveResponse = snakeService.move(moveRequest());
+        when(snakeStrategy.move(eq(moveRequest))).thenReturn(moveResponse);
+        Mono<MoveResponse> actualMoveResponse = snakeService.move(moveRequest);
 
         // then
-//        verify(snakeStrategy).move(eq(moveRequest));
-//        assertThat(moveResponse, is(notNullValue()));
+        verify(snakeStrategy).move(eq(moveRequest));
+        assertThat(actualMoveResponse, is(notNullValue()));
     }
 
 }

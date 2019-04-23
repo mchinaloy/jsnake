@@ -1,6 +1,10 @@
 package com.snake.router;
 
-import com.snake.model.domain.request.*;
+import com.snake.model.domain.request.Board;
+import com.snake.model.domain.request.Coordinate;
+import com.snake.model.domain.request.Game;
+import com.snake.model.domain.request.Snake;
+import com.snake.model.domain.request.Turn;
 import com.snake.model.request.EndRequest;
 import com.snake.model.request.MoveRequest;
 import com.snake.model.request.StartRequest;
@@ -10,31 +14,63 @@ import java.util.Collections;
 public interface SnakeControllerITFixtureBuilder {
 
     static Game game(String id) {
-        return new Game(id);
+        return Game.builder()
+                .id(id)
+                .build();
     }
 
     static Turn turn(Integer turn) {
-        return new Turn(turn);
+        return Turn.builder()
+                .turn(turn)
+                .build();
     }
 
     static Board board() {
-        return new Board(5, 5, Collections.singletonList(snake()), Collections.singletonList(new Coordinate(1, 2)));
+        return Board.builder()
+                .height(5)
+                .width(5)
+                .snakes(Collections.singletonList(snake()))
+                .food(Collections.singletonList(Coordinate.builder()
+                        .x(1)
+                        .y(2)
+                        .build()))
+                .build();
     }
 
     static Snake snake() {
-        return new Snake("aSnake", "snake", 1, Collections.singletonList(new Coordinate(1, 2)));
+        return Snake.builder().id("aSnake").name("snake").health(1)
+                .body(Collections.singletonList(Coordinate.builder()
+                        .x(1)
+                        .y(2)
+                        .build()))
+                .build();
     }
 
     static StartRequest startRequest() {
-        return new StartRequest(game("aGame"), turn(1), board(), snake());
+        return StartRequest.builder()
+                .game(game("aGame"))
+                .turn(turn(1))
+                .board(board())
+                .snake(snake())
+                .build();
     }
 
     static MoveRequest moveRequest() {
-        return new MoveRequest(game("aGame"), turn(1), board(), snake());
+        return MoveRequest.builder()
+                .game(game("aGame"))
+                .turn(turn(1))
+                .board(board())
+                .snake(snake())
+                .build();
     }
 
     static EndRequest endRequest() {
-        return new EndRequest(game("aGame"), turn(1), board(), snake());
+        return EndRequest.builder()
+                .game(game("aGame"))
+                .turn(turn(1))
+                .board(board())
+                .snake(snake())
+                .build();
     }
 
 }

@@ -21,22 +21,34 @@ public class StarSnakeStrategy implements SnakeStrategy {
     private final TailType tailType = TailType.PIXEL;
 
     @Override
-    public Mono<StartResponse> start(Mono<StartRequest> startRequest) {
-        return Mono.just(new StartResponse(Color.RED.getColor(), HeadType.SHARP.getHeadType(), TailType.PIXEL.getTailType()));
+    public Mono<StartResponse> start(final Mono<StartRequest> startRequest) {
+        return Mono.just(StartResponse.builder()
+                .color(Color.RED.getColor())
+                .headType(HeadType.SHARP.getHeadType())
+                .tailType(TailType.PIXEL.getTailType())
+                .build());
     }
 
     @Override
-    public Mono<MoveResponse> move(Mono<MoveRequest> moveRequest) {
+    public Mono<MoveResponse> move(final Mono<MoveRequest> moveRequest) {
         Random random = new Random();
         int selection = random.nextInt(4) + 1;
         if (selection == 1) {
-            return Mono.just(new MoveResponse(Move.UP.getMove()));
+            return Mono.just(MoveResponse.builder()
+                    .move(Move.UP.getMove())
+                    .build());
         } else if (selection == 2) {
-            return Mono.just(new MoveResponse(Move.DOWN.getMove()));
+            return Mono.just(MoveResponse.builder()
+                    .move(Move.DOWN.getMove())
+                    .build());
         } else if (selection == 3) {
-            return Mono.just(new MoveResponse(Move.LEFT.getMove()));
+            return Mono.just(MoveResponse.builder()
+                    .move(Move.LEFT.getMove())
+                    .build());
         }
-        return Mono.just(new MoveResponse(Move.RIGHT.getMove()));
+        return Mono.just(MoveResponse.builder()
+                .move(Move.RIGHT.getMove())
+                .build());
     }
 
 }
