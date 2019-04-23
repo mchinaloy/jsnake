@@ -9,6 +9,7 @@ import com.snake.model.request.StartRequest;
 import com.snake.model.response.MoveResponse;
 import com.snake.model.response.StartResponse;
 import lombok.Getter;
+import reactor.core.publisher.Mono;
 
 import java.util.Random;
 
@@ -20,22 +21,22 @@ public class StarSnakeStrategy implements SnakeStrategy {
     private final TailType tailType = TailType.PIXEL;
 
     @Override
-    public StartResponse start(StartRequest startRequest) {
-        return new StartResponse(Color.RED.getColor(), HeadType.SHARP.getHeadType(), TailType.PIXEL.getTailType());
+    public Mono<StartResponse> start(Mono<StartRequest> startRequest) {
+        return Mono.just(new StartResponse(Color.RED.getColor(), HeadType.SHARP.getHeadType(), TailType.PIXEL.getTailType()));
     }
 
     @Override
-    public MoveResponse move(MoveRequest moveRequest) {
+    public Mono<MoveResponse> move(Mono<MoveRequest> moveRequest) {
         Random random = new Random();
         int selection = random.nextInt(4) + 1;
         if (selection == 1) {
-            return new MoveResponse(Move.UP.getMove());
+            return Mono.just(new MoveResponse(Move.UP.getMove()));
         } else if (selection == 2) {
-            return new MoveResponse(Move.DOWN.getMove());
+            return Mono.just(new MoveResponse(Move.DOWN.getMove()));
         } else if (selection == 3) {
-            return new MoveResponse(Move.LEFT.getMove());
+            return Mono.just(new MoveResponse(Move.LEFT.getMove()));
         }
-        return new MoveResponse(Move.RIGHT.getMove());
+        return Mono.just(new MoveResponse(Move.RIGHT.getMove()));
     }
 
 }

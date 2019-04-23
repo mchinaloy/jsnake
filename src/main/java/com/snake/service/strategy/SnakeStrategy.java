@@ -4,11 +4,12 @@ import com.snake.model.request.MoveRequest;
 import com.snake.model.request.StartRequest;
 import com.snake.model.response.MoveResponse;
 import com.snake.model.response.StartResponse;
+import reactor.core.publisher.Mono;
 
 public interface SnakeStrategy {
 
-    StartResponse start(StartRequest startRequest);
+    Mono<StartResponse> start(Mono<StartRequest> startRequest);
 
-    MoveResponse move(MoveRequest moveRequest);
+    Mono<MoveResponse> move(Mono<MoveRequest> moveRequest);
 
 }

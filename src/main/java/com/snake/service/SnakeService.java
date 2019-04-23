@@ -5,6 +5,7 @@ import com.snake.model.request.StartRequest;
 import com.snake.model.response.MoveResponse;
 import com.snake.model.response.StartResponse;
 import com.snake.service.strategy.SnakeStrategy;
+import reactor.core.publisher.Mono;
 
 public class SnakeService {
 
@@ -14,11 +15,11 @@ public class SnakeService {
         this.snakeStrategy = snakeStrategy;
     }
 
-    public StartResponse start(StartRequest startRequest) {
+    public Mono<StartResponse> start(Mono<StartRequest> startRequest) {
         return snakeStrategy.start(startRequest);
     }
 
-    public MoveResponse move(MoveRequest moveRequest) {
+    public Mono<MoveResponse> move(Mono<MoveRequest> moveRequest) {
         return snakeStrategy.move(moveRequest);
     }
 

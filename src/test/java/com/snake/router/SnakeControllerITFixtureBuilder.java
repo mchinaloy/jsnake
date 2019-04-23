@@ -1,4 +1,4 @@
-package com.snake.controller;
+package com.snake.router;
 
 import com.snake.model.domain.request.*;
 import com.snake.model.request.EndRequest;
