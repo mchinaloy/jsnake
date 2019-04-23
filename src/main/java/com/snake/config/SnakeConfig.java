@@ -14,7 +14,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class SnakeConfig {
+class SnakeConfig {
 
     @Bean
     public RouterFunction<ServerResponse> router (final SnakeHandler snakeHandler) {

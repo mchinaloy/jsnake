@@ -17,7 +17,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 class StarSnakeStrategyUT {
 
-    private StarSnakeStrategy starSnakeStrategy = new StarSnakeStrategy();
+    private final StarSnakeStrategy starSnakeStrategy = new StarSnakeStrategy();
 
     @DisplayName("validRequest_Start_ReturnResponse")
     @Test

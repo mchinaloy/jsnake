@@ -26,8 +26,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class SnakeServiceUT {
 
-    private SnakeStrategy snakeStrategy = mock(SnakeStrategy.class);
-    private SnakeService snakeService = new SnakeService(snakeStrategy);
+    private final SnakeStrategy snakeStrategy = mock(SnakeStrategy.class);
+    private final SnakeService snakeService = new SnakeService(snakeStrategy);
 
     @DisplayName("validRequest_Start_DelegateToStrategy")
     @Test
