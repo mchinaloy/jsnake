@@ -70,29 +70,29 @@ public class StarRunner {
         List<Node> neighbors = Graph.getNeighbors(graph.getEdges(), current);
         //distance is the current node's distance to start
         Double distance = current.getDistance();
-        for(Node neighbor : neighbors) {
-            //temp is the distance from current node to a neighbor
-            Double temp = Graph.getDistanceFrom(graph.getEdges(), current, neighbor);
-            //If searched already contains neighbor, no need to double check. Continue in loop.
-            if(!searched.contains(neighbor)) {
-                if(distance + temp < neighbor.getDistance()) {
-                    //Shorter path has been found. Update neighboring node.
 
-                    Node node = NodeBuilder.builder()
-                            .coordinate(Coordinate.builder()
-                                    .x(neighbor.getCoordinate().getX())
-                                    .y(neighbor.getCoordinate().getY())
-                                    .build())
-                            .heuristic(Node.distanceFrom(neighbor, destination))
-                            .distance(distance + temp)
-                            .previous(current)
-                            .build();
+        neighbors.stream()
+                .filter(node -> !searched.contains(node))
+                .forEach(neighbor -> {
+                    //temp is the distance from current node to a neighbor
+                    Double temp = Graph.getDistanceFrom(graph.getEdges(), current, neighbor);
+                    //If searched already contains neighbor, no need to double check. Continue in loop.
+                    if(distance + temp < neighbor.getDistance()) {
+                        //Shorter path has been found. Update neighboring node.
+                        Node node = NodeBuilder.builder()
+                                .coordinate(Coordinate.builder()
+                                        .x(neighbor.getCoordinate().getX())
+                                        .y(neighbor.getCoordinate().getY())
+                                        .build())
+                                .heuristic(Node.distanceFrom(neighbor, destination))
+                                .distance(distance + temp)
+                                .previous(current)
+                                .build();
 
-                    //Allow neighbor to be searched through by adding it to the unsearched queue.
-                    unsearched.add(node);
-                }
-            }
-        }
+                        //Allow neighbor to be searched through by adding it to the unsearched queue.
+                        unsearched.add(node);
+                    }
+                });
     }
 
 }

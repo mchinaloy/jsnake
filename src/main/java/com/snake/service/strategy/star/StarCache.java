@@ -5,6 +5,7 @@ import com.snake.model.domain.strategy.star.Edge;
 import com.snake.model.domain.strategy.star.Graph;
 import com.snake.model.domain.strategy.star.Node;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class StarCache {

@@ -89,31 +89,32 @@ public class StarConfiguration {
     }
 
     public static Move getDirection(final Node start, final Node next, final List<Edge> edges) {
-        for(Edge edge : edges) {
-            if(edge.getStart().equals(start)) {
-                if(edge.getEnd().equals(next)) {
-                    Node end = edge.getEnd();
-                    if(end.getCoordinate().getX() > start.getCoordinate().getX()) {
-                        log.info("Moving Right");
-                        return Move.RIGHT;
-                    } else if(end.getCoordinate().getX() < start.getCoordinate().getX()) {
-                        log.info("Moving Left");
-                        return Move.LEFT;
-                    } else if(start.getCoordinate().getY() > end.getCoordinate().getY()) {
-                        log.info("Moving Up");
-                        return Move.UP;
-                    } else {
-                        log.info("Moving Down");
-                        return Move.DOWN;
-                    }
-                }
+        Optional<Edge> edge = edges.stream()
+                .parallel()
+                .filter(startEdge -> startEdge.getStart().equals(start))
+                .filter(endEdge -> endEdge.getEnd().equals(next))
+                .findFirst();
+
+        if(edge.isPresent()) {
+            if (edge.get().getEnd().getCoordinate().getX() > start.getCoordinate().getX()) {
+                log.info("Moving Right");
+                return Move.RIGHT;
+            } else if (edge.get().getEnd().getCoordinate().getX() < start.getCoordinate().getX()) {
+                log.info("Moving Left");
+                return Move.LEFT;
+            } else if (start.getCoordinate().getY() > edge.get().getEnd().getCoordinate().getY()) {
+                log.info("Moving Up");
+                return Move.UP;
+            } else {
+                log.info("Moving Down");
+                return Move.DOWN;
             }
         }
         log.info("Moving Default Left");
         return Move.LEFT;
     }
 
-    private Optional<Edge> createReachableEdge(int x, int y, Node end, List<Snake> snakes) {
+    private Optional<Edge> createReachableEdge(final int x, final int y, final Node end, final List<Snake> snakes) {
         if(!isOtherSnakeInTheWay(end.getCoordinate().getX(), end.getCoordinate().getY(), snakes)) {
             return Optional.of(Edge.builder()
                     .start(NodeBuilder.builder()
@@ -130,22 +131,19 @@ public class StarConfiguration {
     }
 
     private boolean isOtherSnakeInTheWay(final int x, final int y, final List<Snake> snakes) {
-        for(Snake snake : snakes) {
-            boolean collision = isBodyInTheWay(x, y, snake.getBody());
-            if(collision) {
-                return true;
-            }
-        }
-        return false;
+        Optional<Snake> result = snakes.stream()
+                .parallel()
+                .filter(snake -> isBodyInTheWay(x, y, snake.getBody()))
+                .findFirst();
+        return result.isPresent();
     }
 
     private boolean isBodyInTheWay(final int x, final int y, final List<Coordinate> body) {
-        for(Coordinate coordinate : body) {
-            if(coordinate.getX().equals(x) && coordinate.getY().equals(y)) {
-                return true;
-            }
-        }
-        return false;
+        Optional<Coordinate> result = body.stream()
+                .parallel()
+                .filter(coordinate -> coordinate.getX().equals(x) && coordinate.getY().equals(y))
+                .findFirst();
+        return result.isPresent();
     }
 
 }
