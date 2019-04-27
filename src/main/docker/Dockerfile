@@ -2,7 +2,7 @@
 FROM alpine
 
 COPY engine_0.2.23_Linux_x86_64.tar.gz /
-# COPY snake-config.json /.snake-config.json
+# COPY you-config.json /.you-config.json
 
 RUN apk add --no-cache tar && \
     tar --warning=no-unknown-keyword -zxf engine_0.2.23_Linux_x86_64.tar.gz && \

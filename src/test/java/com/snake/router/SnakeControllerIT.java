@@ -51,9 +51,18 @@ class SnakeControllerIT {
     @Test
     void move() {
         // given
+        Mono<StartRequest> startRequest = Mono.just(startRequest());
         Mono<MoveRequest> moveRequest = Mono.just(moveRequest());
 
         // when & then
+        webTestClient.post()
+                .uri("/start")
+                .contentType(APPLICATION_JSON)
+                .body(startRequest, StartRequest.class)
+                .exchange()
+                .expectStatus()
+                .isOk();
+
         webTestClient.post()
                 .uri("/move")
                 .contentType(APPLICATION_JSON)

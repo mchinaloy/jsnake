@@ -1,6 +1,5 @@
 package com.snake.model.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.snake.model.domain.request.Board;
@@ -18,9 +17,7 @@ public class StartRequest {
     private final Game game;
     private final Turn turn;
     private final Board board;
-
-    @JsonProperty("you")
-    private final Snake snake;
+    private final Snake you;
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class StartRequestBuilder {

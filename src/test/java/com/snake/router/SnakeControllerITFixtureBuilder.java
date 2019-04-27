@@ -20,25 +20,26 @@ public interface SnakeControllerITFixtureBuilder {
     }
 
     static Turn turn(Integer turn) {
-        return Turn.builder()
-                .turn(turn)
-                .build();
+        return new Turn(turn);
     }
 
     static Board board() {
         return Board.builder()
-                .height(5)
-                .width(5)
+                .height(3)
+                .width(3)
                 .snakes(Collections.singletonList(snake()))
                 .food(Collections.singletonList(Coordinate.builder()
                         .x(1)
-                        .y(2)
+                        .y(0)
                         .build()))
                 .build();
     }
 
     static Snake snake() {
-        return Snake.builder().id("aSnake").name("snake").health(1)
+        return Snake.builder()
+                .id("aSnake")
+                .name("snake")
+                .health(1)
                 .body(Collections.singletonList(Coordinate.builder()
                         .x(1)
                         .y(2)
@@ -51,7 +52,7 @@ public interface SnakeControllerITFixtureBuilder {
                 .game(game("aGame"))
                 .turn(turn(1))
                 .board(board())
-                .snake(snake())
+                .you(snake())
                 .build();
     }
 
@@ -60,7 +61,7 @@ public interface SnakeControllerITFixtureBuilder {
                 .game(game("aGame"))
                 .turn(turn(1))
                 .board(board())
-                .snake(snake())
+                .you(snake())
                 .build();
     }
 

@@ -3,7 +3,9 @@ package com.snake.config;
 import com.snake.handler.SnakeHandler;
 import com.snake.service.SnakeService;
 import com.snake.service.strategy.SnakeStrategy;
-import com.snake.service.strategy.StarSnakeStrategy;
+import com.snake.service.strategy.star.StarCache;
+import com.snake.service.strategy.star.StarConfiguration;
+import com.snake.service.strategy.star.StarSnakeStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -32,8 +34,18 @@ class SnakeConfig {
     }
 
     @Bean
-    public SnakeStrategy snakeStrategy() {
-        return new StarSnakeStrategy();
+    public StarConfiguration starConfiguration() {
+        return new StarConfiguration();
+    }
+
+    @Bean
+    public StarCache starCache(StarConfiguration starConfiguration) {
+        return new StarCache(starConfiguration);
+    }
+
+    @Bean
+    public SnakeStrategy snakeStrategy(StarCache starCache) {
+        return new StarSnakeStrategy(starCache);
     }
 
     @Bean

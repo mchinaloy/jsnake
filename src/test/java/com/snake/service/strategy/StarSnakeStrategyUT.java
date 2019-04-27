@@ -4,6 +4,9 @@ import com.snake.model.request.MoveRequest;
 import com.snake.model.request.StartRequest;
 import com.snake.model.response.MoveResponse;
 import com.snake.model.response.StartResponse;
+import com.snake.service.strategy.star.StarCache;
+import com.snake.service.strategy.star.StarConfiguration;
+import com.snake.service.strategy.star.StarSnakeStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
@@ -17,7 +20,9 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 class StarSnakeStrategyUT {
 
-    private final StarSnakeStrategy starSnakeStrategy = new StarSnakeStrategy();
+    private final StarConfiguration starConfiguration = new StarConfiguration();
+    private final StarCache starCache = new StarCache(starConfiguration);
+    private final StarSnakeStrategy starSnakeStrategy = new StarSnakeStrategy(starCache);
 
     @DisplayName("validRequest_Start_ReturnResponse")
     @Test
