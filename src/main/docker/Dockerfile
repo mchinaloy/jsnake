@@ -1,13 +1,5 @@
-# docker build -t battlesnake-server2 .
-FROM alpine
+FROM openjdk:8u212-slim
 
-COPY engine_0.2.23_Linux_x86_64.tar.gz /
-# COPY you-config.json /.you-config.json
+COPY maven/ /opt/jsnake
 
-RUN apk add --no-cache tar && \
-    tar --warning=no-unknown-keyword -zxf engine_0.2.23_Linux_x86_64.tar.gz && \
-    rm -rf engine_0.2.23_Linux_x86_64.tar.gz
-
-VOLUME /battlesnake
-
-CMD ["./engine", "dev"]
+CMD ["java", "-jar", "/opt/jsnake/jsnake-1.2.jar"]

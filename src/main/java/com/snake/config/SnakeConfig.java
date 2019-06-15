@@ -39,12 +39,12 @@ class SnakeConfig {
     }
 
     @Bean
-    public StarCache starCache(StarConfiguration starConfiguration) {
+    public StarCache starCache(final StarConfiguration starConfiguration) {
         return new StarCache(starConfiguration);
     }
 
     @Bean
-    public SnakeStrategy snakeStrategy(StarCache starCache) {
+    public SnakeStrategy snakeStrategy(final StarCache starCache) {
         return new StarSnakeStrategy(starCache);
     }
 

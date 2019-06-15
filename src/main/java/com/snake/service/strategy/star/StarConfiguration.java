@@ -12,11 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Slf4j
 public class StarConfiguration {
 
-    public List<Node> createNodes(final Board board) {
+    List<Node> createNodes(final Board board) {
         List<Node> nodes = new ArrayList<>();
         for(int i = 0; i < board.getHeight(); i++) {
             for(int j = 0; j < board.getWidth(); j++) {
@@ -32,7 +33,7 @@ public class StarConfiguration {
         return nodes;
     }
 
-    public List<Edge> createEdges(final int width, final int height, final List<Snake> snakes) {
+    List<Edge> createEdges(final int width, final int height, final List<Snake> snakes) {
         List<Edge> edges = new ArrayList<>();
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
@@ -88,7 +89,7 @@ public class StarConfiguration {
         return edges;
     }
 
-    public static Move getDirection(final Node start, final Node next, final List<Edge> edges) {
+    static Move getDirection(final Node start, final Node next, final List<Edge> edges) {
         Optional<Edge> edge = edges.stream()
                 .parallel()
                 .filter(startEdge -> startEdge.getStart().equals(start))
@@ -110,8 +111,20 @@ public class StarConfiguration {
                 return Move.DOWN;
             }
         }
-        log.info("Moving Default Left");
-        return Move.LEFT;
+
+        log.info("Moving Random");
+        Random random = new Random();
+        int randomMove = random.nextInt(4);
+
+        if(randomMove == 0) {
+            return Move.RIGHT;
+        } else if(randomMove == 1) {
+            return Move.LEFT;
+        } else if(randomMove == 2) {
+            return Move.UP;
+        }
+
+        return Move.DOWN;
     }
 
     private Optional<Edge> createReachableEdge(final int x, final int y, final Node end, final List<Snake> snakes) {

@@ -1,7 +1,6 @@
 package com.snake.service.strategy.star;
 
 import com.snake.model.domain.request.Coordinate;
-import com.snake.model.domain.strategy.star.Edge;
 import com.snake.model.domain.strategy.star.Graph;
 import com.snake.model.domain.strategy.star.Node;
 import com.snake.model.domain.strategy.star.NodeBuilder;
@@ -15,14 +14,17 @@ import java.util.Stack;
 
 @Slf4j
 @Builder
-public class StarRunner {
+class StarRunner {
 
     private final Graph graph;
-    private final List<Node> searched = new ArrayList<>();
-    private final PriorityQueue<Node> unsearched = new PriorityQueue<>();
+    private List<Node> searched;
+    private PriorityQueue<Node> unsearched;
 
-    public Node run(final Node start, final Node end) {
+    Node run(final Node start, final Node end) {
         log.info("Running A* search");
+
+        searched = new ArrayList<>();
+        unsearched = new PriorityQueue<>();
 
         Node startWithDistanceAndHeuristic = NodeBuilder.builder()
                 .distance(0.0)
@@ -72,6 +74,7 @@ public class StarRunner {
         Double distance = current.getDistance();
 
         neighbors.stream()
+                .parallel()
                 .filter(node -> !searched.contains(node))
                 .forEach(neighbor -> {
                     //temp is the distance from current node to a neighbor
@@ -88,7 +91,6 @@ public class StarRunner {
                                 .distance(distance + temp)
                                 .previous(current)
                                 .build();
-
                         //Allow neighbor to be searched through by adding it to the unsearched queue.
                         unsearched.add(node);
                     }
